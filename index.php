@@ -77,14 +77,14 @@ function test_input($data) {
 </form>
 
 <?php
-echo "<h2>Your Input:</h2>";
+echo "<h2>Your Input your info :</h2>";
 echo $name;
 echo "<br>";
 echo $email;
 echo "<br>";
 echo $website;
 echo "<br>";
-echo $comment;
+echo $review;
 echo "<br>";
 echo $gender;
 ?>
