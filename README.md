@@ -2,6 +2,7 @@
 
 
 
-[![Image](https://github.com/anirudhadak2/ansible-project/blob/main/playbook/5.png)
+[![Image](https://github.com/anirudhadak2/do1801/blob/main/images/1.png)
 
 
+images/1.png
