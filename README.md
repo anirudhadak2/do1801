@@ -1,5 +1,9 @@
 # do1801
 
+https://www.redhat.com/en/interactive-labs/get-started-red-hat-openshift-developers
+
+
+
 Php Code for  S2I   With  webhook  
 
 Creating  Php web image by S2I
