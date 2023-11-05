@@ -1,0 +1,176 @@
+
+[root@crc-lgph7-master-0 /]# hostname
+crc-lgph7-master-0
+[root@crc-lgph7-master-0 /]#
+
+
+
+6N40OjlSLKE5wL6ck_0x
+
+6N40OjlSLKE5wL6ck_0x             ==> secret second  
+
+http://dep1-default.crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io/       ===> route  link 
+           crc-lgph7-master-0
+
+https://crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io:6443/apis/build.openshift.io/v1/namespaces/default/buildconfigs/dep1/webhooks/6N40OjlSLKE5wL6ck_0x /generic
+
+
+#oc get bc  dep1  -o yaml | grep secret 
+   ykcMkGI8ibyoRqWoW4dR            ==>   second secret 
+webhook  generic URL :    https://api.crc.testing:6443/apis/build.openshift.io/v1/namespaces/default/buildconfigs/dep1/webhooks/<secret>/generic
+   https://crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io:6443       
+     secret  :      6N40OjlSLKE5wL6ck_0x           
+
+      
+https://crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io:6443/apis/build.openshift.io/v1/namespaces/default/buildconfigs/dep1/webhooks/6N40OjlSLKE5wL6ck_0x/generic
+
+
+on webhook  
+
+Make sure that   to avoid    '/'  before the :6443
+             and url  has start with    https://hostname 
+
+
+Add Webhook 
+
+Payload URL :  https://crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io:6443/apis/build.openshift.io/v1/namespaces/default/buildconfigs/dep1/webhooks/6N40OjlSLKE5wL6ck_0x/generic
+
+
+content type : application/x-www-form-urlencoded
+
+Secret :  6N40OjlSLKE5wL6ck_0x           
+
+SSL verification : Disbaled (not recommended)
+
+-----------------------------
+Which events would you like to trigger this webhook ?
+     just the push event.
+
+
+Active 
+
+
+=============================================================
+
+
+
+
+
+
+[root@crc-lgph7-master-0 /]#
+[root@crc-lgph7-master-0 /]# oc new-app  --name=dep1  https://github.com/anirudhadak2/do1801.git
+
+--> Found image 3c29bdb (14 months old) in image stream "openshift/php" under tag "8.0-ubi8" for "php"
+
+    Apache 2.4 with PHP 8.0
+    -----------------------
+    PHP 8.0 available as container is a base platform for building and running various PHP 8.0 applications and frameworks. PHP is an HTML-embedded scripting language. PHP attempts to make it easy for developers to write dynamically generated web pages. PHPalso offers built-in database integration for several commercial and non-commercial database management systems, so writing a database-enabled webpage with PHP is fairly simple. The most common use of PHP coding is probably as a replacement for CGI scripts.
+
+    Tags: builder, php, php80, php-80
+
+    * The source repository appears to match: php
+    * A source build using source code from https://github.com/anirudhadak2/do1801.git will be created
+      * The resulting image will be pushed to image stream tag "dep1:latest"
+      * Use 'oc start-build' to trigger a new build
+
+--> Creating resources ...
+    imagestream.image.openshift.io "dep1" created
+    buildconfig.build.openshift.io "dep1" created
+Warning: would violate PodSecurity "restricted:latest": allowPrivilegeEscalation != false (container "dep1" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "dep1" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "dep1" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container"dep1" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+    deployment.apps "dep1" created
+    service "dep1" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/dep1' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/dep1'
+    Run 'oc status' to view your app.
+
+
+[root@crc-lgph7-master-0 /]# oc describe bc dep1
+
+Name:           dep1
+Namespace:      default
+Created:        14 seconds ago
+Labels:         app=dep1
+                app.kubernetes.io/component=dep1
+                app.kubernetes.io/instance=dep1
+Annotations:    openshift.io/generated-by=OpenShiftNewApp
+Latest Version: 1
+
+Strategy:       Source
+URL:            https://github.com/anirudhadak2/do1801.git
+From Image:     ImageStreamTag openshift/php:8.0-ubi8
+Volumes:        <none>
+Output to:      ImageStreamTag dep1:latest
+
+Build Run Policy:       Serial
+Triggered by:           Config, ImageChange
+Webhook GitHub:
+        URL:    https://api.crc.testing:6443/apis/build.openshift.io/v1/namespaces/default/buildconfigs/dep1/webhooks/<secret>/github
+
+Webhook Generic:
+        URL:            https://api.crc.testing:6443/apis/build.openshift.io/v1/namespaces/default/buildconfigs/dep1/webhooks/<secret>/generic
+  
+      AllowEnv:       false
+Builds History Limit:
+        Successful:     5
+        Failed:         5
+
+Build   Status          Duration                Creation Time
+dep1-1  pending         waiting for 13s         2023-11-05 13:27:41 +0000 UTC
+
+Events: <none>
+-----------------------------------------------------
+
+[root@crc-lgph7-master-0 /]# oc get bc dep1 -o yaml | grep secret
+      secret: hPtgX9-HrgXQmdwfiU7l
+      secret: 6N40OjlSLKE5wL6ck_0x
+
+
+[root@crc-lgph7-master-0 /]# oc get pod
+NAME           READY   STATUS    RESTARTS   AGE
+dep1-1-build   1/1     Running   0          39s
+[root@crc-lgph7-master-0 /]# oc get deploy
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+dep1   0/1     1            0           44s
+[root@crc-lgph7-master-0 /]# oc get pod
+NAME                   READY   STATUS              RESTARTS   AGE
+dep1-1-build           0/1     Completed           0          47s
+dep1-9f7449686-cfsrq   0/1     ContainerCreating   0          5s
+
+[root@crc-lgph7-master-0 /]# oc get svc
+NAME         TYPE           CLUSTER-IP    EXTERNAL-IP                            PORT(S)             AGE
+dep1         ClusterIP      10.217.5.56   <none>                                 8080/TCP,8443/TCP   51s
+kubernetes   ClusterIP      10.217.4.1    <none>                                 443/TCP             398d
+openshift    ExternalName   <none>        kubernetes.default.svc.cluster.local   <none>              398d
+
+[root@crc-lgph7-master-0 /]# oc expose svc dep1
+route.route.openshift.io/dep1 exposed
+
+[root@crc-lgph7-master-0 /]# oc get route
+NAME   HOST/PORT                                                      PATH   SERVICES   PORT       TERMINATION   WILDCARD
+dep1   dep1-default.crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io          dep1       8080-tcp                 None
+
+[root@crc-lgph7-master-0 /]# oc get route
+NAME   HOST/PORT                                                      PATH   SERVICES   PORT       TERMINATION   WILDCARD
+dep1   dep1-default.crc-lgph7-master-0.crc.pp0sz7c97qwk.instruqt.io          dep1       8080-tcp                 None
+[root@crc-lgph7-master-0 /]# history
+
+==========================================================================
+
+
+6  oc new-app  --name=dep1  https://github.com/anirudhadak2/do1801.git
+   47  oc describe bc dep1
+   48  oc get bc dep1 -o yaml | grep secret
+   49  oc get pod
+   50  oc get deploy
+   51  oc get pod
+   52  oc get svc
+   53  oc expose svc dep1
+   54  oc get route
+   55  oc get route
+   56  history
+[root@crc-lgph7-master-0 /]#
+
+===================================================================================
+
