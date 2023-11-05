@@ -53,7 +53,7 @@ function test_input($data) {
 ?>
 
 <h2>PHP Form Validation </h2>
-<h3> hello Anirudha Here Please fill the from with valid details ! </h3>
+<h3> HEllo to all Anirudha Here.. ... ! </h3>
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
   Name: <input type="text" name="name">
