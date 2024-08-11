@@ -7,8 +7,12 @@ WORKDIR /app
 # Step 3: Copy the current directory contents into the container at /app
 COPY . /app
 
+# Copy the requirements file into the container
+COPY requirements.txt .
+
 # Step 4: Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir flask
+#  RUN pip install --no-cache-dir flask
+RUN pip install -r requirements.txt  
 
 # Step 5: Make port 5000 available to the world outside this container
 EXPOSE 5000
