@@ -7,6 +7,11 @@ WORKDIR /app
 # Step 3: Copy the current directory contents into the container at /app
 COPY . /app
 
+
+# Switch to the non-root user
+USER nonrootuser
+
+
 # Copy the requirements file into the container
 COPY requirements.txt .
 
